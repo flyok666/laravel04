@@ -1,0 +1,29 @@
+12月10日
+学生列表功能
+1.定义路由(student/index)，创建视图
+2.创建数据表(students),字段：姓名，年龄同时创建数据表对应的模型------》手动往数据表添加两条数据----》将数据表中的学生信息全部取出---》输出到视图中展示。
+
+Model模型：用来和数据表交互（涉及数据表中数据的增删改查） ，一个模型对应一张数据表
+创建模型：php artisan make:model Student -m           -m表示同时创建该模型对应的数据表迁移文件
+
+
+修改AppServiceProvider
+
+ use Illuminate\Support\Facades\Schema;
+ 
+    
+public function boot()
+{
+   
+	Schema::defaultStringLength(191);
+
+}
+
+执行数据迁移文件：php artisan migrate
+
+添加学生功能：
+1.展示添加表单(student/add)
+2.表单提交，接收表单数据，保存到数据表(post:student/save)
+
+http请求方式：get,post
+网络安全机制：csrf     在表单里面添加  {{ csrf_field() }}  方法
