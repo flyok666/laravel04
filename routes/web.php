@@ -29,3 +29,15 @@ Route::get('/student/edit/{id}','StudentController@edit');
 Route::post('/student/update/{id}','StudentController@update');
 //删除学生
 Route::get('/student/delete/{id}','StudentController@delete');
+
+
+//账号列表
+Route::get('/admin/index','AdminController@index');
+//添加账号
+Route::get('/admin/create','AdminController@create');
+Route::post('/admin/store','AdminController@store');
+//修改账号
+Route::get('/admin/edit/{id}','AdminController@edit');
+Route::post('/admin/update/{id}','AdminController@update');
+//shanchu 删除账号
+Route::get('/admin/delete/{id}','AdminController@delete');
