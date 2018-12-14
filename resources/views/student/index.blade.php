@@ -7,6 +7,7 @@
     <tr>
         <th>ID</th>
         <th>姓名</th>
+        <th>头像</th>
         <th>年龄</th>
         <th>操作</th>
     </tr>
@@ -14,6 +15,7 @@
         <tr>
             <td>{{ $student->id }}</td>
             <td>{{ $student->name }}</td>
+            <td><img src="{{ $student->head }}" /></td>
             <td>{{ $student->age }}</td>
             <td>
                 <a href="/student/edit/{{ $student->id }}" >编辑 </a>

@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
     public function index()
     {
@@ -36,6 +41,7 @@ class StudentController extends Controller
             'sex' => 'required',
             'city' => 'required',
             'description' => 'required',
+            'head'=>'required|image'
         ],[//定义错误信息
             'name.required'=>'姓名不能为空',
             'age.required'=>'年龄不能为空',
@@ -43,6 +49,8 @@ class StudentController extends Controller
             'sex.required'=>'性别不能为空',
             'city.required'=>'城市不能为空',
             'description.required'=>'个人简介不能为空',
+            'head.required'=>'必须上传头像',
+            'head.image'=>'上传头像必须是图片',
         ]);
         //验证不通过，会跳回表单
         //验证通过，继续往下执行
@@ -58,6 +66,11 @@ class StudentController extends Controller
         $student->sex = $request->sex;
         $student->city = $request->city;
         $student->description = $request->description;
+        //在学习信息保存前处理上传图片
+        $path = $request->file('head')->store('public');
+        $url = Storage::url($path);
+        $student->head = $url;
+
         $student->save();
         //echo '添加成功';
         //跳转回学生列表页

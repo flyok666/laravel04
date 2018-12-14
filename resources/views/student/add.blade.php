@@ -3,10 +3,14 @@
 @section('content')
     <h1>添加学生</h1>
     @include('layout._error')
-    <form method="post" action="/student/save">
+    <form method="post" action="/student/save" enctype="multipart/form-data">
         <div class="form-group">
             <label>姓名</label>
             <input type="text" class="form-control" name="name" value="{{ old('name') }}" >
+        </div>
+        <div class="form-group">
+            <label>上传头像</label>
+            <input type="file" name="head" >
         </div>
         <div class="form-group">
             <label>年龄</label>
