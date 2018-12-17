@@ -3,6 +3,14 @@
 @section('content')
 
 <h1>学生列表</h1>
+<form method="get" action="/student/index" class="form-inline">
+    <div class="form-group">
+        <label>姓名</label>
+        <input type="text" class="form-control" name="name">
+    </div>
+
+    <button type="submit" class="btn btn-default">搜索</button>
+</form>
 <table class="table table-bordered">
     <tr>
         <th>ID</th>
@@ -38,5 +46,5 @@
         <td>编辑 删除 查看</td>
     </tr>--}}
 </table>
-{{ $students->links() }}
+{{ $students->appends(['name'=>$name])->links() }}
 @stop

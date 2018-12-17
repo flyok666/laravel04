@@ -21,10 +21,13 @@ class UserController extends Controller
             [
                 'username'=>'required',
                 'password'=>'required',
+                'captcha' => 'required|captcha',
             ],
             [
                 'username.required'=>'用户名不能为空',
                 'password.required'=>'密码不能为空',
+                'captcha.required' => '验证码不能为空',
+                'captcha.captcha' => '请输入正确的验证码',
 
             ]);
 

@@ -14,19 +14,30 @@ class StudentController extends Controller
         $this->middleware('auth');
     }
     //
-    public function index()
+    public function index(Request $request)
     {
         //获取数据表（students）中的所有数据
         //$students = Student::all();
 
-        //分页显示列表
-        $students = Student::paginate(5);//每页显示5条
+        //判断搜索关键字name
+        $name = $request->name;
+        //dd($name);
+        if($name){
+            //有搜索关键字      sql: SELECT * FROM students WHERE name like "%赵云%"
+            $students = Student::where('name','like','%'.$name.'%')->paginate(2);
+        }else{
+            //分页显示列表
+            $students = Student::paginate(2);//每页显示5条
+        }
+        //dd($students);
+
+
 
 
 
 
         //将students变量传递到视图
-        return view('student.index',['students'=>$students]);
+        return view('student.index',['students'=>$students,'name'=>$name]);
     }
 
     //显示添加表单
