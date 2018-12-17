@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\School;
 use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -22,6 +23,8 @@ class StudentController extends Controller
         $students = Student::paginate(5);//每页显示5条
 
 
+
+
         //将students变量传递到视图
         return view('student.index',['students'=>$students]);
     }
@@ -29,7 +32,9 @@ class StudentController extends Controller
     //显示添加表单
     public function add()
     {
-        return view('student.add');
+        //获取所有学校数据
+        $schools = School::all();
+        return view('student.add',['schools'=>$schools]);
     }
     //接收并处理表单提交的数据
     public function save(Request $request)
@@ -40,6 +45,7 @@ class StudentController extends Controller
             'age' => 'required|integer',
             'sex' => 'required',
             'city' => 'required',
+            'school_id' => 'required',
             'description' => 'required',
             'head'=>'required|image'
         ],[//定义错误信息
@@ -48,6 +54,7 @@ class StudentController extends Controller
             'age.integer'=>'年龄必须是整数',
             'sex.required'=>'性别不能为空',
             'city.required'=>'城市不能为空',
+            'school_id.required'=>'学校不能为空',
             'description.required'=>'个人简介不能为空',
             'head.required'=>'必须上传头像',
             'head.image'=>'上传头像必须是图片',
@@ -65,6 +72,7 @@ class StudentController extends Controller
         $student->age = $request->age;
         $student->sex = $request->sex;
         $student->city = $request->city;
+        $student->school_id = $request->school_id;
         $student->description = $request->description;
         //在学习信息保存前处理上传图片
         $path = $request->file('head')->store('public');

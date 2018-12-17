@@ -46,3 +46,6 @@ Route::get('/login','UserController@login')->name('login');
 Route::post('/store','UserController@store');
 //退出
 Route::get('/logout','UserController@logout');
+
+//学校列表
+Route::get('/school/index','SchoolController@index');

@@ -9,6 +9,7 @@
         <th>姓名</th>
         <th>头像</th>
         <th>年龄</th>
+        <th>学校</th>
         <th>操作</th>
     </tr>
     @foreach ($students as $student)
@@ -17,6 +18,7 @@
             <td>{{ $student->name }}</td>
             <td><img src="{{ $student->head }}" /></td>
             <td>{{ $student->age }}</td>
+            <td>{{ $student->school_id?$student->school->name:'' }}</td>
             <td>
                 <a href="/student/edit/{{ $student->id }}" >编辑 </a>
                 <a href="/student/delete/{{ $student->id }}" >删除</a>
