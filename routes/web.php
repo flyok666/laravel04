@@ -49,3 +49,6 @@ Route::get('/logout','UserController@logout');
 
 //学校列表
 Route::get('/school/index','SchoolController@index');
+//修改密码
+Route::get('/password','UserController@password');
+Route::post('/updatePw','UserController@updatePw');
